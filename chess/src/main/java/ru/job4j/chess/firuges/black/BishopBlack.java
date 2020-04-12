@@ -6,6 +6,8 @@ import ru.job4j.chess.firuges.Figure;
 import java.util.Objects;
 
 /**
+ * 2. Каркас шахматной доски[#242942]
+ * @author Dmitry Stepanov [#242692]
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
  * @since 0.1

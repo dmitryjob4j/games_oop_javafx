@@ -9,6 +9,14 @@ import ru.job4j.chess.firuges.black.BishopBlack;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * * 2. Каркас шахматной доски[#242942]
+ * * @author Dmitry Stepanov [#242692]
+ *
+ * @author Petr Arsentev (parsentev@yandex.ru)
+ * @version $Id$
+ * @since 0.1
+ */
 
 public class BishopBlackTest {
     @Test
@@ -71,5 +79,11 @@ public class BishopBlackTest {
         BishopBlack isDiagonal = new BishopBlack(Cell.A7);
         boolean result = isDiagonal.isDiagonal(Cell.A7, Cell.G2);
         assertThat(result, is(false));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void isDialogException() {
+        BishopBlack bishopBlack = new BishopBlack(Cell.A7);
+        bishopBlack.way(Cell.A7, Cell.G4);
     }
 }

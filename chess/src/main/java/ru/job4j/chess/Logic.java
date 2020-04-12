@@ -7,7 +7,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * //TODO add comments.
+ * * 2. Каркас шахматной доски[#242942]
+ * * @author Dmitry Stepanov [#242692]
  *
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
@@ -28,19 +29,19 @@ public class Logic {
             int idest = -1;
             if (index != -1) {
                 Cell[] steps = this.figures[index].way(source, dest);
-                for(int i=0; i<steps.length;i++) {
+                for (int i = 0; i < steps.length; i++) {
                     if (this.findBy(steps[i]) != -1) {
                         idest = this.findBy(steps[i]);
                         break;
                     }
                 }
-                if (idest==-1 && steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                if (idest == -1 && steps.length > 0 && steps[steps.length - 1].equals(dest)) {
                     rst = true;
                     this.figures[index] = this.figures[index].copy(dest);
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IllegalStateException ise) {
+            ise.printStackTrace();
         }
         return rst;
     }
@@ -65,8 +66,6 @@ public class Logic {
 
     @Override
     public String toString() {
-        return "Logic{" +
-                "figures=" + Arrays.toString(this.figures) +
-                '}';
+        return "Logic{" + "figures=" + Arrays.toString(this.figures) + '}';
     }
 }
