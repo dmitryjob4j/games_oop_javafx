@@ -29,19 +29,26 @@ public class Logic {
             int idest = -1;
             if (index != -1) {
                 Cell[] steps = this.figures[index].way(source, dest);
-                for (int i = 0; i < steps.length; i++) {
-                    if (this.findBy(steps[i]) != -1) {
-                        idest = this.findBy(steps[i]);
-                        break;
-                    }
-                }
-                if (idest == -1 && steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                if (isWayFree(steps) && steps.length > 0 && steps[steps.length - 1].equals(dest)) {
                     rst = true;
                     this.figures[index] = this.figures[index].copy(dest);
                 }
             }
         } catch (IllegalStateException ise) {
             ise.printStackTrace();
+        }
+        return rst;
+    }
+
+    public boolean isWayFree(Cell[] steps) {
+        boolean rst = false;
+        for (int i = 0; i < steps.length; i++) {
+            if (this.findBy(steps[i]) != -1) {
+                rst = false;
+                break;
+            } else {
+                rst = true;
+            }
         }
         return rst;
     }
