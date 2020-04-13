@@ -36,10 +36,10 @@ public class BishopBlack implements Figure {
         Cell[] steps = new Cell[size];
         int deltaX = (source.x < dest.x) ? 1 : -1;
         int deltaY = (source.y < dest.y) ? 1 : -1;
-        for (int i = 0; i < size; i++) {
-            int x = Math.abs((i + 1) + source.x * deltaX);
-            int y = Math.abs((i + 1) + source.y * deltaY);
-            steps[i] = Cell.findBy(x, y);
+        for (int i = 1; i <= size; i++) {
+            int x = Math.abs(i + source.x * deltaX);
+            int y = Math.abs(i + source.y * deltaY);
+            steps[i - 1] = Cell.findBy(x, y);
         }
         return steps;
     }
