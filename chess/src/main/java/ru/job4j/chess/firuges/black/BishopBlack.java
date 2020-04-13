@@ -7,6 +7,7 @@ import java.util.Objects;
 
 /**
  * 2. Каркас шахматной доски[#242942]
+ *
  * @author Dmitry Stepanov [#242692]
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
@@ -33,9 +34,11 @@ public class BishopBlack implements Figure {
         }
         int size = (source.x < dest.x) ? dest.x - source.x : source.x - dest.x;
         Cell[] steps = new Cell[size];
+        int deltaX = (source.x < dest.x) ? 1 : -1;
+        int deltaY = (source.y < dest.y) ? 1 : -1;
         for (int i = 1; i <= size; i++) {
-            int x = (source.x < dest.x) ? (source.x + i) : (source.x - i);
-            int y = (source.y < dest.y) ? (source.y + i) : (source.y - i);
+            int x = Math.abs(i + source.x * deltaX);
+            int y = Math.abs(i + source.y * deltaY);
             steps[i - 1] = Cell.findBy(x, y);
         }
         return steps;
@@ -43,16 +46,7 @@ public class BishopBlack implements Figure {
 
     public boolean isDiagonal(Cell source, Cell dest) {
         boolean rsl = false;
-        if (source.x != dest.x || source.y != dest.y) {
-            int size = (source.x < dest.x) ? (dest.x - source.x) : (source.x - dest.x);
-            for (int i = 1; i <= size; i++) {
-                int x = (source.x < dest.x) ? (source.x + i) : (source.x - i);
-                int y = (source.y < dest.y) ? (source.y + i) : (source.y - i);
-                if (dest == Cell.findBy(x, y)) {
-                    rsl = true;
-                }
-            }
-        }
+        rsl = Math.abs(dest.x - source.x) - Math.abs(dest.y - source.y) == 0 ? true : false;
         return rsl;
     }
 
@@ -63,8 +57,12 @@ public class BishopBlack implements Figure {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         BishopBlack that = (BishopBlack) o;
         return position == that.position;
     }
