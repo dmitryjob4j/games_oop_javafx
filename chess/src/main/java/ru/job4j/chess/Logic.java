@@ -26,7 +26,6 @@ public class Logic {
         boolean rst = false;
         try {
             int index = this.findBy(source);
-            int idest = -1;
             if (index != -1) {
                 Cell[] steps = this.figures[index].way(source, dest);
                 if (isWayFree(steps) && steps.length > 0 && steps[steps.length - 1].equals(dest)) {
