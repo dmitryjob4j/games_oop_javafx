@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 /**
  * Крестики-нолики на JavaFX [#242717]
  *
+ * @version 2 обьеденение методов isWinner
  * @since 10.05.2020
  */
 public class Logic3T {
@@ -29,7 +30,24 @@ public class Logic3T {
         return rsl;
     }
 
-    public boolean isWinnerX() {
+    public boolean isWinnerS(Predicate<Figure3T> predicate) {
+        return this.fillBy(predicate, 0, 0, 1, 0) //первая вертикаль
+                || this.fillBy(predicate, 0, 1, 1, 0) //втарая вертикаль
+                || this.fillBy(predicate, 0, 2, 1, 0)//третья вертикаль
+                || this.fillBy(predicate, 0, 0, 0, 1) //первая горизонталь
+                || this.fillBy(predicate, 1, 0, 0, 1)//вторая горизонталь
+                || this.fillBy(predicate, 2, 0, 0, 1)//третья горизонталь
+                || this.fillBy(predicate, 0, 0, 1, 1) //диагональ слева в низ
+                || this.fillBy(predicate, 2, 0, -1, 1); //справа на в низ
+    }
+
+    public boolean hasGap() {
+        boolean rsl = Arrays.stream(this.table).flatMap(Arrays::stream)
+                .anyMatch(t -> !t.hasMarkO() && !t.hasMarkX());
+        return rsl;
+    }
+}
+    /*public boolean isWinnerX() {
         return this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 0) //первая вертикаль
                 || this.fillBy(Figure3T::hasMarkX, 0, 1, 1, 0) //втарая вертикаль
                 || this.fillBy(Figure3T::hasMarkX, 0, 2, 1, 0)//третья вертикаль
@@ -49,11 +67,6 @@ public class Logic3T {
                 || this.fillBy(Figure3T::hasMarkO, 2, 0, 0, 1)//третья горизонталь
                 || this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1) //диагональ слева в низ
                 || this.fillBy(Figure3T::hasMarkO, 2, 0, -1, 1); //справа на в низ
-    }
+    }*/
 
-    public boolean hasGap() {
-        boolean rsl = Arrays.stream(this.table).flatMap(Arrays::stream)
-                .anyMatch(t -> !t.hasMarkO() && !t.hasMarkX());
-        return rsl;
-    }
-}
+
