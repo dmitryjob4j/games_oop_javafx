@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
  * Крестики-нолики на JavaFX [#242717]
  * тесты
  *
- * @version 2 обьеденение методов isWinner
+ * @version 3 обьеденение методов isWinner
  * @since 10.05.2020
  */
 public class Logic3TTest {
@@ -22,7 +22,7 @@ public class Logic3TTest {
                 {new Figure3T(), new Figure3T(), new Figure3T(true)}
         };
         Logic3T login = new Logic3T(table);
-        assertThat(login.isWinnerS(Figure3T::hasMarkX), is(true));
+        assertThat(login.isWinnerX(), is(true));
     }
 
 
@@ -34,8 +34,8 @@ public class Logic3TTest {
                 {new Figure3T(false), new Figure3T(true), new Figure3T(false)}
         };
         Logic3T logic3T = new Logic3T(table);
-        assertThat(logic3T.isWinnerS(Figure3T::hasMarkO), is(false));
-        assertThat(logic3T.isWinnerS(Figure3T::hasMarkX), is(false));
+        assertThat(logic3T.isWinnerO(), is(false));
+        assertThat(logic3T.isWinnerX(), is(false));
         assertThat(logic3T.hasGap(), is(false));
 
     }
@@ -48,8 +48,8 @@ public class Logic3TTest {
                 {new Figure3T(true), new Figure3T(true), new Figure3T(true)}
         };
         Logic3T logic3T = new Logic3T(table);
-        assertThat(logic3T.isWinnerS(Figure3T::hasMarkX), is(true));
-        assertThat(logic3T.isWinnerS(Figure3T::hasMarkO), is(true));
+        assertThat(logic3T.isWinnerX(), is(true));
+        assertThat(logic3T.isWinnerO(), is(true));
     }
 
     @Test
@@ -60,8 +60,8 @@ public class Logic3TTest {
                 {new Figure3T(), new Figure3T(true), new Figure3T(false)}
         };
         Logic3T logic3T = new Logic3T(table);
-        assertThat(logic3T.isWinnerS(Figure3T::hasMarkX), is(true));
-        assertThat(logic3T.isWinnerS(Figure3T::hasMarkO), is(true));
+        assertThat(logic3T.isWinnerX(), is(true));
+        assertThat(logic3T.isWinnerO(), is(true));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class Logic3TTest {
                 {new Figure3T(false), new Figure3T(), new Figure3T()}
         };
         Logic3T logic3T = new Logic3T(table);
-        assertThat(logic3T.isWinnerS(Figure3T::hasMarkO), is(true));
+        assertThat(logic3T.isWinnerO(), is(true));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class Logic3TTest {
                 {new Figure3T(false), new Figure3T(), new Figure3T(true)}
         };
         Logic3T logic3T = new Logic3T(table);
-        assertThat(logic3T.isWinnerS(Figure3T::hasMarkO), is(true));
+        assertThat(logic3T.isWinnerO(), is(true));
     }
 
     @Test
